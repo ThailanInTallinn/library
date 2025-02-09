@@ -1,0 +1,26 @@
+* {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+}
+
+html {
+	width: 100vw;
+	height: 100vh;
+	background-color: #fffff2;
+}
+
+.header-container {
+	width: 100%;
+	height: 90px;
+	background-color: black;
+	padding-left: 15px;
+	display: flex;
+	align-items: flex-end;
+}
+
+.header-container>p {
+	color: white;
+	text-align: left;
+	font-size: 38px;
+}
