@@ -23,6 +23,7 @@ html {
 	color: white;
 	text-align: left;
 	font-size: 38px;
+	font-weight: 600;
 }
 
 body {
@@ -38,6 +39,7 @@ body {
 	grid-auto-rows: minmax(250px, 330px);
 	justify-items: center;
 	align-items: center;
+	position: relative;
 }
 
 .book-card {
@@ -50,4 +52,19 @@ body {
 	justify-content: space-evenly;
 	flex-direction: column;
 	border-radius: 4%;
+}
+
+.new-book-button {
+	width: 120px;
+	height: 60px;
+	font-size: 20px;
+	border: none;
+	background-color: black;
+	color: white;
+	font-weight: 600;
+	border-radius: 5%;
+	cursor: pointer;
+	position: fixed;
+	bottom: 10%;
+	right: 10%;
 }
