@@ -36,11 +36,11 @@ saveButton.addEventListener("click", (e) => {
 	const booksRead = document.createElement("p");
 	booksname.innerText = myLibrary[myLibrary.length - 1].name;
 	currentBook.appendChild(booksname);
-	booksAuthor.innerText = myLibrary[myLibrary.length - 1].author;
+	booksAuthor.innerText = `Author: ${myLibrary[myLibrary.length - 1].author}`;
 	currentBook.appendChild(booksAuthor);
-	booksPages.innerText = myLibrary[myLibrary.length - 1].pages;
+	booksPages.innerText = `Pages: ${myLibrary[myLibrary.length - 1].pages}`;
 	currentBook.appendChild(booksPages);
-	booksRead.innerText = myLibrary[myLibrary.length - 1].read;
+	booksRead.innerText = `Read: ${myLibrary[myLibrary.length - 1].read}`;
 	currentBook.appendChild(booksRead);
 	myLibrary[myLibrary.length - 1].index = myLibrary.length - 1;
 
