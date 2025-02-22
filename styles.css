@@ -54,6 +54,10 @@ body {
 	border-radius: 4%;
 }
 
+.book-card h2 {
+	text-align: center;
+}
+
 .new-book-button {
 	width: 120px;
 	height: 60px;
