@@ -22,61 +22,63 @@ saveButton.addEventListener("click", (e) => {
 	const authorInput = document.querySelector("#author");
 	const pagesInput = document.querySelector("#pages");
 	const readInput = document.querySelector('input[name="read"]:checked');
-	addBookToLibrary(myLibrary, nameInput.value, authorInput.value, pagesInput.value, readInput.value);
+	const newLibrary = addBookToLibrary(myLibrary, nameInput.value, authorInput.value, pagesInput.value, readInput.value);
 	nameInput.value = "";
 	authorInput.value = "";
 	pagesInput.value = 0;
 	readInput.value = false;
 	dialog.close();
-	const currentBook = document.createElement("div");
-	currentBook.classList.add('book-card');
-	const booksname = document.createElement("h2");
-	const booksAuthor = document.createElement("p");
-	const booksPages = document.createElement("p");
-	const booksRead = document.createElement("p");
-	booksname.innerText = myLibrary[myLibrary.length - 1].name;
-	currentBook.appendChild(booksname);
-	booksAuthor.innerText = `Author: ${myLibrary[myLibrary.length - 1].author}`;
-	currentBook.appendChild(booksAuthor);
-	booksPages.innerText = `Pages: ${myLibrary[myLibrary.length - 1].pages}`;
-	currentBook.appendChild(booksPages);
-	booksRead.innerText = `Read: ${myLibrary[myLibrary.length - 1].read}`;
-	currentBook.appendChild(booksRead);
-	myLibrary[myLibrary.length - 1].index = myLibrary.length - 1;
-
-	const booksContainer = document.querySelector(".main-container");
-	booksContainer.appendChild(currentBook);
+	displayBooks(newLibrary, newLibrary.length - 1);
 })
 
 function addBookToLibrary(library, name, author, pages, read) {
 	const newBook = new Book(name, author, pages, read);
 	library.push(newBook);
+	return library;
 }
 
-function displayBooks() {
-	for (i = 0; i < myLibrary.length; i++) {
+function displayBooks(library, lastElement = 0) {
+	const booksContainer = document.querySelector(".main-container");
+
+	for (i = lastElement; i < library.length; i++) {
 		const currentBook = document.createElement("div");
 		currentBook.classList.add('book-card');
 		const booksName = document.createElement('h2');
 		const booksAuthor = document.createElement('p');
 		const booksPages = document.createElement('p');
 		const booksRead = document.createElement('p');
+		const deleteButton = document.createElement('button');
+		deleteButton.classList.add("delete-button");
+		deleteButton.innerText = "Delete book";
 
-		booksName.innerText = myLibrary[i].name;
+		booksName.innerText = library[i].name;
 		currentBook.appendChild(booksName);
-		booksAuthor.innerText = `Author: ${myLibrary[i].author}`;
+		booksAuthor.innerText = `Author: ${library[i].author}`;
 		currentBook.appendChild(booksAuthor);
-		booksPages.innerText = `Pages: ${myLibrary[i].pages}`;
+		booksPages.innerText = `Pages: ${library[i].pages}`;
 		currentBook.appendChild(booksPages);
-		booksRead.innerText = `Read: ${myLibrary[i].read}`;
+		booksRead.innerText = `Read: ${library[i].read}`;
 		currentBook.appendChild(booksRead);
-		myLibrary[i].index = i;
+		const bookIndex = library[i].index = i;
+		currentBook.appendChild(deleteButton);
+		deleteButton.addEventListener("click", () => {
+			deleteBook(bookIndex, library);
+		})
 
-		const booksContainer = document.querySelector(".main-container");
 		booksContainer.appendChild(currentBook);
 	}
 }
 
+function deleteBook(index, library) {
+	const newLibrary = library.filter((book) => book.index != index);
+	const allElements = document.querySelector(".main-container");
+	while (allElements.firstChild) {
+		allElements.removeChild(allElements.firstChild);
+	}
+	displayBooks(newLibrary);
+	document.querySelector(".main-container").appendChild(newBookButton);
+}
+
 window.addEventListener("load", () => {
-	displayBooks();
+	displayBooks(myLibrary);
 })
